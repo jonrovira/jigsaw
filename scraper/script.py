@@ -7,6 +7,7 @@ import logging
 import json
 import pycountry
 from geopy.geocoders import Nominatim
+import locator
 
 
 #############
@@ -97,36 +98,59 @@ def countAndSort():
 			countRow(row, reader.line_num)
 
 
-def getLocation(organization):
-	if organization in locations:
-		l = locations[organization]
+def getLocation(country, state):
+	if country == "USA":
+		try:
+			s = locator.stringToState(state)
+			bin = country + "-" + s
+			if bin in locations:
+				l = locations[bin]
+			else:
+				l = geolocator.geocode(s + ", " + country)
+				locations[bin] = l
+
+		except KeyError:
+			bin = country
+			if bin in locations:
+				l = locations[country]
+			else:
+				l = geolocator.geocode(country)
+				locations[bin] = l
+
 	else:
-		l = geolocator.geocode(organization)
-		locations[organization] = l
-	print l
-	return l
+		bin = country
+		if bin in locations:
+			l = locations[country]
+		else:
+			l = geolocator.geocode(country)
+			locations[bin] = l
+
+	return {
+		'bin': bin,
+		'lat': l.latitude,
+		'lng': l.longitude
+	}
 
 
 
-def incrementInfluence(year, organization):
+def incrementInfluence(year, country, state):
+	location = getLocation(country, state)
 
 	if year in influences:
-		if organization in influences[year]:
-			influences[year][organization]["count"] += 1
+		if location['bin'] in influences[year]:
+			influences[year][location['bin']]["count"] += 1
 		else:
-			location = getLocation(organization)
-			influences[year][organization] = {
+			influences[year][location['bin']] = {
 				"count": 1,
-				"lat": location.latitude,
-				"lng": location.longitude
+				"lat": location['lat'],
+				"lng": location['lng']
 			}
 	else:
-		location = getLocation(organization)
-		influences[year] = { 
-			organization: { 
-				"count": 1, 
-				"lat": location.latitude, 
-				"lng": location.longitude
+		influences[year] = {
+			location['bin']: {
+				"count": 1,
+				"lat": location['lat'],
+				"lng": location['lng']
 			}
 		}
 
@@ -139,7 +163,8 @@ def calcRowInfluence(row, line, year, topPlasmids):
 			rowYear = datetime.strptime(row[6], "%Y-%m-%d %H:%M:%S").year
 			if rowYear <= year:
 				country = pycountry.countries.get(alpha2=row[4]).alpha3
-				incrementInfluence(year, country)
+				state = row[5]
+				incrementInfluence(year, country, state)
 		except ValueError:
 			logging.warning("Order in row " + str(line) + " didn't fit expected format")
 

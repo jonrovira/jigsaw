@@ -1,36 +1,46 @@
-html, body, div.wrapper, div#content, div#box {
+html, body, div.wrapper {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	font-family: 'Lucida Grande';
 }
 
-div.timeline {
+div.timeline-container {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 60px;
-	background-color: rgba(82, 124, 138, 0.9);
+	background-color: #444;
 	z-index: 100;
 
 	ul {
 		margin: 0;
-		padding: 20px 0 0 0;
 		list-style: none;
 
-		li {
+		li.year {
 			float: left;
+			padding: 24px 0 23px;
 			width: calc(100% / 12);
 			text-align: center;
-			color: #aaa;
+			font-size: 0.7em;
+			color: #888;
+			cursor: pointer;
+		}
+		li.year.active {
+			background-color: #888;
+			color: #444;
+		}
+		li.year:not(.active):hover {
+			background-color: #4c4c4c;
 		}
 	}
 }
 
-div.map {
+div.map-container {
 	width: 100%;
 	height: 100%;
-	background-color: #6D97A1;
+	background-color: #E5D7AE;
 
 	div#map {
 		width: 100%;

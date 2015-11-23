@@ -1,0 +1,8 @@
+<ul>
+	<li ng-repeat="year in years"
+	    ng-click="setActive($index)"
+	    ng-class="{active : activeYear==year}"
+		class="year">
+		{{ year }}
+	</li>
+</ul>

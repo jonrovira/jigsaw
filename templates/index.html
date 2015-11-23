@@ -10,22 +10,25 @@
 
 
 
-	<body>
+	<body ng-app="jigsawApp">
 		<div class="wrapper">
-			<div id="content"></div>
+			<div class="timeline-container" ui-view="timeline"></div>
+			<div class="map-container" ui-view="map"></div>
 		</div>
 
 
-		<script src="{{ url_for('static', filename='bower_components/react/react.js') }}"></script>
-		<script src="{{ url_for('static', filename='bower_components/react/react-dom.js') }}"></script>
+		<script src="{{ url_for('static', filename='bower_components/angular/angular.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='bower_components/angular-ui-router/release/angular-ui-router.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='bower_components/d3/d3.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='bower_components/topojson/topojson.js') }}"></script>
 		<script src="{{ url_for('static', filename='bower_components/datamaps/dist/datamaps.world.min.js') }}"></script>
 
-		<script src="{{ url_for('static', filename='build/map.js') }}"></script>
-		<script src="{{ url_for('static', filename='build/timeline.js') }}"></script>
-		<script src="{{ url_for('static', filename='build/box.js') }}"></script>
+		<script src="{{ url_for('static', filename='app/app.module.js') }}"></script>
+		<script src="{{ url_for('static', filename='app/app.routes.js') }}"></script>
+		<script src="{{ url_for('static', filename='app/modules/timeline/timelineCtrl.js') }}"></script>
+		<script src="{{ url_for('static', filename='app/modules/map/mapCtrl.js') }}"></script>
+		<script src="{{ url_for('static', filename='app/modules/map/mapFctry.js') }}"></script>
 	</body>
 
 </html>
