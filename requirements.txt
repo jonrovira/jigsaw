@@ -22,7 +22,6 @@ pbr==0.10.8
 pexpect==4.0.1
 pickleshare==0.5
 ptyprocess==0.5
-pygame==1.9.2pre
 python-dateutil==2.4.2
 pytz==2015.6
 requests==2.5.0
