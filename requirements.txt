@@ -17,13 +17,11 @@ ipython-genutils==0.1.0
 itsdangerous==0.24
 nltk==3.0.1
 numpy==1.9.1
-pandas==0.17.0
 path.py==8.1.2
 pbr==0.10.8
 pexpect==4.0.1
 pickleshare==0.5
 ptyprocess==0.5
-pycountry==1.18
 pygame==1.9.2pre
 python-dateutil==2.4.2
 pytz==2015.6
