@@ -2,6 +2,6 @@ venv/*
 *.pyc
 scraper/*.csv
 node_modules/*
-static/bower_components/*
+
 static/style/*.map
 static/style/.sass-cache/*
