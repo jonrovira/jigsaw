@@ -44,7 +44,7 @@ angular
 								latitude: yearData[country].lat,
 								longitude: yearData[country].lng,
 								fillKey: function () {
-									var r = Math.floor(Math.random() * 3);
+									var r = Math.floor(Math.random() * 5);
 									return fillKeys[r];
 								}
 							});
@@ -71,6 +71,7 @@ angular
 						console.log(reason);
 					});
 				};
+
 
 				o.setYear = function (year) {
 					o.activeYear = year;

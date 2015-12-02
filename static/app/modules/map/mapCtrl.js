@@ -16,16 +16,16 @@ angular
 					element: document.getElementById('map'),
 					projection: 'mercator',
 					fills: {
-						'USA': '#9C4B13',
-						'RUS': '#FB7823',
-						'FRA': '#F94833',
-						'AFG': '#373234',
-						'PAK': '#7A5F40',
-						defaultFill: '#106B6E'
+						'USA': '#2E3192',
+						'RUS': '#29AAE2',
+						'FRA': '#662D91',
+						'AFG': '#39B54A',					
+						'PAK': '#C0C2FF',
+						defaultFill: '#5C728C'
 					},
 					geographyConfig: {
 						hideAntarctica: false,
-						borderColor: '#E5D7AE',
+						borderColor: '#C0DDFF',
 						highlightOnHover: false,
 						popupOnHover: false
 					}

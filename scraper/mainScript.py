@@ -98,6 +98,7 @@ def countAndSort():
 			countRow(row, reader.line_num)
 
 
+
 def getLocation(country, state):
 	if country == "USA":
 		try:
@@ -186,6 +187,39 @@ def writeResults():
 
 
 
+def getTopOrgs():
+	orgCounts = {}
+	orgPersons = {}
+
+	with open('plasmid_order_data_report.csv', 'rb') as f:
+		reader = csv.reader(f)
+		for row in reader:
+			org = row[3]
+			if org in orgCounts:
+				orgCounts[org] += 1
+			else:
+				orgCounts[org] = 1
+
+	topOrgs = sorted(orgCounts, key=orgCounts.get, reverse=True)[:85]
+
+	for topOrg in topOrgs:
+		with open('deposit_data_report.csv', 'rb') as f:
+			reader = csv.reader(f)
+			for row in reader:
+				org = str(row[3])
+				if org == str(topOrg):
+					person = row[2]
+					orgPersons[org] = {
+						"person": person,
+						"index": topOrgs.index(org)
+					}
+
+	print orgPersons
+
+
+
+
+
 
 
 
@@ -195,10 +229,13 @@ def writeResults():
 # MAIN #
 ########
 def main():
-	getNames()
-	countAndSort()
-	calcInfluence()
-	writeResults()
+
+	# getNames()
+	# countAndSort()
+	# calcInfluence()
+	# writeResults()
+
+	getTopOrgs()
 
 
 
