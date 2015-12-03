@@ -11,7 +11,7 @@ div.timeline-container {
 	left: 0;
 	width: 100%;
 	height: 60px;
-	background-color: #444;
+	background-color: #333;
 	z-index: 100;
 
 	ul {
@@ -28,11 +28,11 @@ div.timeline-container {
 			cursor: pointer;
 		}
 		li.year.active {
-			background-color: #888;
-			color: #444;
+			background-color: #444;
+			color: #bbb;
 		}
 		li.year:not(.active):hover {
-			background-color: #4c4c4c;
+			background-color: #333;
 		}
 	}
 }

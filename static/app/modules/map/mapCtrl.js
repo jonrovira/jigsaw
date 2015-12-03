@@ -16,11 +16,11 @@ angular
 					element: document.getElementById('map'),
 					projection: 'mercator',
 					fills: {
-						'USA': '#2E3192',
-						'RUS': '#29AAE2',
-						'FRA': '#662D91',
-						'AFG': '#39B54A',					
-						'PAK': '#C0C2FF',
+						'First': '#2E3192',
+						'Second': '#29AAE2',
+						'Third': '#662D91',
+						'Fourth': '#39B54A',					
+						'Other': '#C0C2FF',
 						defaultFill: '#5C728C'
 					},
 					geographyConfig: {
@@ -36,14 +36,14 @@ angular
 					return MapFctry.activeYear;
 				}, function (newValue, oldValue) {
 					MapFctry.getYear().then(function (response) {
-					var orgs = response;
+						var orgs = response;
 
-					map.bubbles(orgs, {
-						borderWidth: 0,
-						popupOnHover: false,
-						highlightOnHover: false
+						map.bubbles(orgs, {
+							borderWidth: 0,
+							popupOnHover: false,
+							highlightOnHover: false
+						});
 					});
-				});
 				});
 
 			}

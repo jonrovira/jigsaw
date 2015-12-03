@@ -10,7 +10,7 @@ div.timeline-container {
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: #444;
+  background-color: #333;
   z-index: 100; }
   div.timeline-container ul {
     margin: 0;
@@ -24,10 +24,10 @@ div.timeline-container {
       color: #888;
       cursor: pointer; }
     div.timeline-container ul li.year.active {
-      background-color: #888;
-      color: #444; }
+      background-color: #444;
+      color: #bbb; }
     div.timeline-container ul li.year:not(.active):hover {
-      background-color: #4c4c4c; }
+      background-color: #333; }
 
 div.map-container {
   width: 100%;

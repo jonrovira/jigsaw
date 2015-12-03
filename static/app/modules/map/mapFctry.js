@@ -22,31 +22,52 @@ angular
 
 
 				o.synthesizeOrgs = function (yearData) {
-					var min = 0,
-						max = 0;
-					var ratio;
+					// Initializations
 					var orgs = [];
-					var fillKeys = ['USA', 'RUS', 'FRA', 'AFG', 'PAK'];
+					var counts,
+					    topFour,
+					    max,
+					    ratio,
+					    fillKeyIndex;
+					var fillKeys = ['First', 'Second', 'Third', 'Fourth', 'Other'];
 
-					for (var country in yearData) {
-						if (yearData.hasOwnProperty(country)) {
-							min = Math.min(min, yearData[country].count);
-							max = Math.max(max, yearData[country].count);
+					// Put country's counts into an array and get the top ones
+					counts = Object.keys(yearData).map(function (key) {
+						return this[key].count;
+					}, yearData);
+					counts = counts.sort(function (a, b) {
+						return a - b;
+					});
+					topFour = counts.slice(Math.max(counts.length - 4, 0));
+
+					// Scale the counts
+					max = Math.max.apply(Math, counts);
+					ratio = max / 100;
+
+					// Helper function to tackle scope issue
+					fillKeyIndex = 0;
+					var setFillKey = function (count) {
+						if (topFour.indexOf(count) > -1) {
+							// remove that from top four
+							topFour.splice(topFour.indexOf(count), 1);
+
+							// Increment fill key index, return correct fill key
+							var i = fillKeyIndex;
+							fillKeyIndex += 1;
+							return fillKeys[i];
+						} else {
+							return fillKeys[4];
 						}
-					}
+					};
 
-					ratio = (max - min) / 100;
-
+					// Create map objects
 					for (var country in yearData) {
 						if (yearData.hasOwnProperty(country)) {
 							orgs.push({
 								radius: Math.ceil(yearData[country].count / ratio) + 5,
 								latitude: yearData[country].lat,
 								longitude: yearData[country].lng,
-								fillKey: function () {
-									var r = Math.floor(Math.random() * 5);
-									return fillKeys[r];
-								}
+								fillKey: setFillKey(yearData[country].count)
 							});
 						}
 					}
